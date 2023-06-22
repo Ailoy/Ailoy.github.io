@@ -1,0 +1,32 @@
+一. 大于(>), 小于(<)运算符
+javascript字符串在进行大于(小于)比较时，会根据第一个不同的字符的ascii值码进行比较，当数字(number)与字符串(string)进行比较大小时，会强制的将数字(number)转换成字符串(string)然后再进行比较
+
+(function(){
+    console.log('13'>'3'); // 输出：false
+    console.log(5>'6');  // 输出： false
+    console.log('d'>'ABDC') // 输出： true
+    console.log(19>'ssf') // 输出 false
+    console.log('A'>'abcdef') // 输出 false
+})()
+二. 相等(==),严格相等(===)运算符
+在进行相等(==)运算比较时，如果一边是字符，一边是数字，会先将字符串转换成数字再进行比较；严格相等(===)则不会进行类型转换，会比较类型是否相等。注NaN与任何值比较时都是false
+
+(function(){
+   console.log('6'==6) // true
+   console.log('6'===6) // false
+   console.log(6===6) // true
+   console.log('abc'==2) // false
+   console.log('abc'=='abc') // true
+   console.log('abc'==='abc') // true
+})()
+三. 一些特殊值的相等与严格相等比较
+(function(){
+    console.log(null==undefined) // 输出：true
+    console.log(null===undefined) // 输出：false
+    console.log(null===null) // 输出：true
+    console.log(undefined===undefined) // 输出：true
+    console.log(NaN==undefined) // 输出：false
+    console.log(NaN==null)  // 输出：false
+    console.log(NaN==NaN)  // 输出：false
+    console.log(NaN===NaN)  // 输出：false
+})()
