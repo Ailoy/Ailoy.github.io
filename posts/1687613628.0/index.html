@@ -1,0 +1,13 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy
+
+s = []
+s = np.asarray(s).reshape(31, 7)
+print(s)
+y=scipy.spatial.distance.pdist(s)
+Z = scipy.cluster.hierarchy.linkage(y, 'single')
+f = scipy.cluster.hierarchy.fcluster(Z, 5, 'maxclust')
+print("平面聚类结果：", f)
+scipy.cluster.hierarchy.dendrogram(Z)
+plt.show()
