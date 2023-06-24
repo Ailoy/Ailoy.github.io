@@ -1,0 +1,29 @@
+y=[21966.2	23821	25973.8	28228	30732.8	32188.8	35128.1];
+n=length(y);
+x=[1:n];
+
+P=polyfit(x,y,1)
+new_x=[x,n+1:n+11];
+new_y=polyval(P,new_x);
+
+p_x = 1:0.1:n;
+p_y = interp1(x,y,p_x,'spline')
+P2=polyfit(p_x,p_y,2)
+new_y2=polyval(P2,new_x)
+
+
+function r = calc(y,new_y)
+    SST = sum((y-mean(y)).^2);
+    SSR = sum((new_y-mean(y)).^2);
+    SSE = sum((y-new_y).^2);
+
+    R1 = SSR/SST;
+    R2 = 1-(SSE/SST);
+
+    %r=R1;   %拟合优度
+    r=SSE;   %残差平方和
+end
+
+r=calc(y,polyval(P,x))
+plot(x+2014,y,'o',new_x+2014,new_y,new_x+2014,new_y2) 
+print -dpng figure.png
