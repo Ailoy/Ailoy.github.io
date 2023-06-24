@@ -1,0 +1,32 @@
+import scipy
+import numpy as np
+
+def fun():
+    v = lambda x: 58 * x[0] + 0.2 * x[0] ** 2 + 54 * x[1] + 0.2 * x[1] ** 2 + 50 * x[2] + 0.2 * x[2] ** 2 - 560
+    return v
+
+
+def con(args):
+    # eq表示 函数结果等于0 ； ineq 表示 表达式大于等于0
+    x1min, x1max, x2min, x2max, x3min, x3max = args
+    cons = ({'type': 'ineq', 'fun': lambda x: x[0] - x1min},
+            # {'type': 'ineq', 'fun': lambda x: -x[0] + x1max},
+            {'type': 'ineq', 'fun': lambda x: x[1] - x2min},
+            # {'type': 'ineq', 'fun': lambda x: -x[1] + x2max},
+            {'type': 'ineq', 'fun': lambda x: x[2] - x3min},
+            # {'type': 'ineq', 'fun': lambda x: -x[2] + x3max}
+            {'type': 'eq', 'fun': lambda x: x[0]+x[1]+x[2]-180},
+            {'type': 'ineq', 'fun': lambda x: x[0]+x[1]-100},
+            {'type': 'ineq', 'fun': lambda x: x[1]-40},
+            )
+    return cons
+
+
+args = (0, -1, 40, -1, 0, -1)  # , x0min, x0max,x1min, x1max, x2min, x2max
+cons = con(args)
+x0 = np.asarray((0.5, 0.5, 0.5))
+
+res = scipy.optimize.minimize(fun(), x0, method='SLSQP', constraints=cons)
+print(res.fun)
+print(res.success)
+print(res.x)
