@@ -1,9 +1,0 @@
-Javascript报错：Failed to execute ‘querySelectorAll’ on ‘Document’: ‘#123456’ is not a valid selector
-
-解决方式(除开特殊符号,第一个字符必须是字母)：
-第一种：
-将ID前面加字母，例如：document.querySelectorAll('#id123456')
-
-第二种:
-根据ID属性,例如：document.querySelectorAll("id=['123456']")
-或者：document.querySelectorAll("[‘id=123456’]")
